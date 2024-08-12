@@ -25,6 +25,9 @@ public class Muelle extends JFrame{
     
     private final ArrayList<Barco> guardarBarcos;
 
+    BarcoPesquero pesquero;
+    BarcoPasajero pasajero;
+    TipoPesquero tipopesquero;
     public Muelle() {
         guardarBarcos = new ArrayList<>();
         Main();
@@ -57,7 +60,82 @@ public class Muelle extends JFrame{
         Agregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String tipo = JOptionPane.showInputDialog("Ingresa el tipo de barco:");
+                if (tipo != null){
+                    tipo= tipo.toUpperCase();
+                    if (tipo.equals("PESQUERO")){
+                        String nombre = JOptionPane.showInputDialog("Ingresa el nombre del barco:");
+                        TipoPesquero tipoPesquero = (TipoPesquero) JOptionPane.showInputDialog(null,
+                                "Seleccione el tipo de pesquero:",
+                                "Tipo de Pesquero",
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                TipoPesquero.values(),
+                                TipoPesquero.PEZ);
+                        guardarBarcos.add(new BarcoPesquero(nombre, tipoPesquero));
+                    }else if(tipo.equals("PASAJERO")){
+                        String nombre = JOptionPane.showInputDialog("Ingresa el nombre del barco:");
+                        int numPasajeros = Integer.parseInt(JOptionPane.showInputDialog(this, "Capacidad de pasajeros:"));
+                        double precioBoleto = Double.parseDouble(JOptionPane.showInputDialog(this, "Precio del boleto:"));
+                        guardarBarcos.add(new BarcoPasajero(nombre, numPasajeros, precioBoleto));
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Opcion incorrecta.");
+                    }
+                }
+            }
+        });
+        
+        AgregarElem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = JOptionPane.showInputDialog("Ingresa el nombre del barco:");
+                if (Buscar(nombre)!=null){
+                    Buscar(nombre).agregarElemento();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Barco no ecnontrado.");
+                }
                 
+            }
+        });
+        
+        Vaciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo = JOptionPane.showInputDialog("Ingresa el tipo de barco:");
+                if (tipo != null){
+                    tipo= tipo.toUpperCase();
+                    if (tipo.equals("PESQUERO")){
+                        
+                    }else if(tipo.equals("PASAJERO")){
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Opcion incorrecta.");
+                    }
+                }
+            }
+        });
+        
+        FechaBa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo = JOptionPane.showInputDialog("Ingresa el tipo de barco:");
+                if (tipo != null){
+                    tipo= tipo.toUpperCase();
+                    if (tipo.equals("PESQUERO")){
+                        
+                    }else if(tipo.equals("PASAJERO")){
+                        
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Opcion incorrecta.");
+                    }
+                }
+            }
+        });
+        
+        Salir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
         
@@ -80,4 +158,13 @@ public class Muelle extends JFrame{
         new Muelle();
     }
     
+    public Barco Buscar(String nombre){
+        for (int contar=0; contar<guardarBarcos.size();contar++){
+            Barco barco= guardarBarcos.get(contar);
+            if (barco.getNombre().equals(nombre)){
+                return barco;
+            }
+        }
+        return null;
+    }
 }

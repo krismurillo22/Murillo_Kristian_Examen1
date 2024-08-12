@@ -24,7 +24,7 @@ public class BarcoPasajero extends Barco{
 
     public void agregarElemento() {
         if (contadorPasajeros < pasajeros.length) {
-            String nombre = JOptionPane.showInputDialog("Introduce tu nombre:");
+            String nombre = JOptionPane.showInputDialog("Ingresa su nombre:");
             pasajeros[contadorPasajeros] = nombre;
             contadorPasajeros++;
         } else {
